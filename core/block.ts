@@ -1679,7 +1679,6 @@ export class Block implements IASTNodeLocation {
    * @returns The input object created.
    */
   appendStatementInput(name: string): Input {
-    this.statementInputCount++;
     return this.appendInput(new StatementInput(name, this));
   }
 
@@ -1711,6 +1710,7 @@ export class Block implements IASTNodeLocation {
    * Allows for custom inputs to be appended to the block.
    */
   appendInput(input: Input): Input {
+    if (input instanceof StatementInput) this.statementInputCount++;
     this.inputList.push(input);
     return input;
   }
